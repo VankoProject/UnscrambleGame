@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="common_screen_margin_32dp">32dp</dimen>
+    <dimen name="medium_text_size">16sp</dimen>
+    <dimen name="common_layout_padding">16dp</dimen>
+    <dimen name="common_view_margin_top">24dp</dimen>
+    <dimen name="large_text_size">40sp</dimen>
+    <dimen name="title_text_size">20sp</dimen>
+</resources>

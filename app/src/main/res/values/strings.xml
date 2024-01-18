@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">UnscrambleGame</string>
+    <string name="app_title">Unscramble</string>
+    <string name="rule_of_the_game">Unscramble the world using all the letters.</string>
+    <string name="hint_input">Enter your word</string>
+    <string name="submit">Submit</string>
+    <string name="skip">Skip</string>
 </resources>

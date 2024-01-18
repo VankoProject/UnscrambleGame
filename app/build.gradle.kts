@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.kliachenko.unscramblegame"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.kliachenko.unscramblegame"
