@@ -19,20 +19,20 @@ class ScenarioTest {
         initialPage.clickSubmit()
         initialPage.checkVisible()
         var buffer = ""
-        "anima".forEach {
+        "anima".forEach { //в цикле добавляем по одной букве в поле ввода и проверяем что копка сабмит не активна и мы на инитиал стейте
             buffer += it
             initialPage.typeText(word = it)
             initialPage.clickSubmit()
             initialPage.checkVisible(input = buffer)
         }
 
-        initialPage.typeText(word = "l")
-        initialPage.checkVisible(input = "animal")
-        initialPage.typeText(word = "l")
-        initialPage.clickSubmit()
-        initialPage.checkVisible(input = "animall")
-        initialPage.replaceText(text = "animal")
-        initialPage.clickSubmit()
+        initialPage.typeText(word = "l") // добавляем букву после цикла и выходит, что происходит равенство букв и на сабмит можно нажать
+        initialPage.checkVisible(input = "animal", submitEnabled = true) // кнопка сабмит появится только если юзер введет такое кол-во букв как и в зашифрованном слове
+        initialPage.typeText(word = "l") // вводим лишнюю букву
+        initialPage.clickSubmit() // проверяем что кнопка опять неактивна
+        initialPage.checkVisible(input = "animall") // проверяем, что в поле ввода отображается то что ввели
+        initialPage.replaceText(text = "animal") // меняем текст опять на верный
+        initialPage.clickSubmit() // проверяем что кнопка опять сатала активна
 
 
         initialPage = InitialPage(counter = "2/2", score = "Score: 20", shuffledWord = "otua")
@@ -48,7 +48,7 @@ class ScenarioTest {
 
         }
         initialPage.typeText(word = "o")
-        initialPage.checkVisible(input = "auto")
+        initialPage.checkVisible(input = "auto", submitEnabled = true)
         initialPage.clickSubmit()
         val gameOverPage = GameOverPage(score = "Score: 40")
         initialPage.checkNotVisible()
@@ -65,11 +65,13 @@ class ScenarioTest {
     fun incorrectThenCorrectThenTwiceIncorrectAndCorrect() {
         var initialPage = InitialPage(counter = "1/2", score = "Score: 0", shuffledWord = "lamina")
         initialPage.checkVisible()
-        initialPage.replaceText(text = "abcder")
+        initialPage.replaceText(text = "abcder") // сразу вводим все кол-во букв, но неправильно
         initialPage.clickSubmit()
-        var errorPage = ErrorPage()
-        errorPage.checkVisible()
-        initialPage.replaceText(text = "animal")
+
+        //Error page ничем не отличается от инитал, отличие только в отображении ошибки у едит текста
+        val errorPage = ErrorPage()
+        errorPage.checkVisible()  // через матчер проверяем, что поле ввода с ошибкой
+        initialPage.replaceText(text = "animal") // вводим корректный текст
         initialPage.clickSubmit()
         initialPage = InitialPage(counter = "2/2", score = "Score: 10", shuffledWord = "otua")
         initialPage.replaceText(text = "abcd")
@@ -109,7 +111,6 @@ class ScenarioTest {
         gameOverPage.checkVisible()
         gameOverPage.clickRestart()
 
-
         initialPage =
             InitialPage(counter = "1/2", score = "Score: 0", shuffledWord = "anecdote".reversed())
         initialPage.checkVisible()
@@ -133,7 +134,6 @@ class ScenarioTest {
         gameOverPage.checkVisible()
         gameOverPage.clickRestart()
 
-
         initialPage =
             InitialPage(counter = "1/2", score = "Score: 0", shuffledWord = "anecdote".reversed())
         initialPage.checkVisible()
@@ -155,7 +155,6 @@ class ScenarioTest {
         initialPage.checkNotVisible()
         gameOverPage.checkVisible()
         gameOverPage.clickRestart()
-
 
         initialPage =
             InitialPage(counter = "1/2", score = "Score: 0", shuffledWord = "anecdote".reversed())
@@ -252,13 +251,13 @@ class ScenarioTest {
     }
 
     @Test
-    fun incorrectThenCorrectThenSkip( ) {
+    fun incorrectThenCorrectThenSkip() {
         var initialPage = InitialPage(counter = "1/2", score = "Score: 0", shuffledWord = "lamina")
         initialPage.checkVisible()
         initialPage.replaceText(text = "abcder")
         initialPage.clickSubmit()
 
-        var errorPage = ErrorPage()
+        val errorPage = ErrorPage()
         errorPage.checkVisible()
         initialPage.replaceText(text = "animal")
         initialPage.clickSubmit()
