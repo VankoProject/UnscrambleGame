@@ -31,6 +31,7 @@
     <TextView
         android:id="@+id/shuffledWordTextView"
         style="@style/CustomTextView"
+        android:freezesText="true"
         android:layout_marginTop="@dimen/common_view_margin_top"
         android:textColor="@color/black"
         android:textSize="@dimen/large_text_size"
@@ -43,26 +44,10 @@
         android:textColor="@color/black"
         android:textSize="@dimen/medium_text_size" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayout"
+    <com.kliachenko.unscramblegame.Input
+        android:id="@+id/input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_view_margin_top"
-        android:hint="@string/hint_input"
-        app:boxBackgroundColor="@color/light_grey"
-        app:boxBackgroundMode="outline"
-        app:boxCornerRadiusBottomEnd="16dp"
-        app:boxCornerRadiusBottomStart="16dp"
-        app:boxCornerRadiusTopEnd="16dp"
-        app:boxCornerRadiusTopStart="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="wrap_content"/>
 
 
     <com.google.android.material.button.MaterialButton
