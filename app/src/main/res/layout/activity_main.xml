@@ -14,6 +14,7 @@
     <TextView
         style="@style/CustomTextView"
         android:text="@string/app_title"
+        android:freezesText="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textSize="@dimen/title_text_size" />
 
@@ -22,17 +23,18 @@
         android:id="@+id/counterTextView"
         style="@style/CustomBackGroundTextView"
         android:layout_gravity="end"
-        tools:text="1/2"
+        android:freezesText="true"
         android:background="@drawable/shape_rounded_blue"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        tools:text="1/2" />
 
     <TextView
         android:id="@+id/shuffledWordTextView"
         style="@style/CustomTextView"
         android:layout_marginTop="@dimen/common_view_margin_top"
         android:textColor="@color/black"
-        tools:text="Animal"
-        android:textSize="@dimen/large_text_size" />
+        android:textSize="@dimen/large_text_size"
+        tools:text="Animal" />
 
     <TextView
         style="@style/CustomTextView"
@@ -78,20 +80,21 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="32dp"
         android:text="@string/skip"
-        android:textColor="@color/blue"/>
+        android:textColor="@color/blue" />
 
     <TextView
         android:id="@+id/scoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:freezesText="true"
         android:layout_gravity="center"
         android:background="@drawable/shape_rounded_grey"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:padding="8dp"
-        tools:text="Score"
         android:textColor="@color/black"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        tools:text="Score" />
 
     <Space style="@style/CustomSpaceStyle" />
 
