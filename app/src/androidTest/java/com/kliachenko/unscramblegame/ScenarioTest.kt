@@ -16,7 +16,11 @@ class ScenarioTest {
     fun correctTwice() {
         var initialPage = InitialPage(counter = "1/2", score = "Score: 0", shuffledWord = "lamina")
         initialPage.checkVisible()
+        activityScenarioRule.scenario.recreate()
+        initialPage.checkVisible()
         initialPage.clickSubmit()
+        initialPage.checkVisible()
+        activityScenarioRule.scenario.recreate()
         initialPage.checkVisible()
         var buffer = ""
         "anima".forEach { //в цикле добавляем по одной букве в поле ввода и проверяем что копка сабмит не активна и мы на инитиал стейте
@@ -26,16 +30,22 @@ class ScenarioTest {
             initialPage.checkVisible(input = buffer)
         }
 
-        initialPage.typeText(word = "l") // добавляем букву после цикла и выходит, что происходит равенство букв и на сабмит можно нажать
-        initialPage.checkVisible(input = "animal", submitEnabled = true) // кнопка сабмит появится только если юзер введет такое кол-во букв как и в зашифрованном слове
-        initialPage.typeText(word = "l") // вводим лишнюю букву
+        initialPage.typeText(word = "l")// добавляем букву после цикла и выходит, что происходит равенство букв и на сабмит можно нажать
+        initialPage.checkVisible(input = "animal", submitEnabled = true)
+        activityScenarioRule.scenario.recreate()
+        initialPage.checkVisible(input = "animal", submitEnabled = true)
+        initialPage.typeText(word = "l") // кнопка сабмит появится только если юзер введет такое кол-во букв как и в зашифрованном слове
         initialPage.clickSubmit() // проверяем что кнопка опять неактивна
-        initialPage.checkVisible(input = "animall") // проверяем, что в поле ввода отображается то что ввели
+        initialPage.checkVisible(input = "animall")
+        activityScenarioRule.scenario.recreate()
+        initialPage.checkVisible(input = "animall")
         initialPage.replaceText(text = "animal") // меняем текст опять на верный
-        initialPage.clickSubmit() // проверяем что кнопка опять сатала активна
+        initialPage.clickSubmit() // проверяем что кнопка опять стала активна
 
 
         initialPage = InitialPage(counter = "2/2", score = "Score: 20", shuffledWord = "otua")
+        initialPage.checkVisible()
+        activityScenarioRule.scenario.recreate()
         initialPage.checkVisible()
         initialPage.clickSubmit()
         initialPage.checkVisible()
@@ -49,15 +59,19 @@ class ScenarioTest {
         }
         initialPage.typeText(word = "o")
         initialPage.checkVisible(input = "auto", submitEnabled = true)
+        activityScenarioRule.scenario.recreate()
         initialPage.clickSubmit()
         val gameOverPage = GameOverPage(score = "Score: 40")
         initialPage.checkNotVisible()
         gameOverPage.checkVisible()
+        activityScenarioRule.scenario.recreate()
         gameOverPage.clickRestart()
 
 
         initialPage =
             InitialPage(counter = "1/2", score = "Score: 0", shuffledWord = "anecdote".reversed())
+        initialPage.checkVisible()
+        activityScenarioRule.scenario.recreate()
         initialPage.checkVisible()
     }
 
