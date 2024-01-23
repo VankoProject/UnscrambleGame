@@ -21,35 +21,35 @@ class ViewModelTest {
 
         actual = viewModel.update(text = "a")
         expected =
-            UiState.InvalidInput(counter = "1/2", score = 0, shuffleWord = "apple".reversed())
+            UiState.InvalidInput
         assertEquals(expected, actual)
 
         actual = viewModel.update(text = "ap")
         expected =
-            UiState.InvalidInput(counter = "1/2", score = 0, shuffleWord = "apple".reversed())
+            UiState.InvalidInput
         assertEquals(expected, actual)
 
         actual = viewModel.update(text = "app")
         expected =
-            UiState.InvalidInput(counter = "1/2", score = 0, shuffleWord = "apple".reversed())
+            UiState.InvalidInput
         assertEquals(expected, actual)
 
         actual = viewModel.update(text = "appl")
         expected =
-            UiState.InvalidInput(counter = "1/2", score = 0, shuffleWord = "apple".reversed())
+            UiState.InvalidInput
         assertEquals(expected, actual)
 
         actual = viewModel.update(text = "apple")
-        expected = UiState.ValidInput(counter = "1/2", score = 0, shuffleWord = "apple".reversed())
+        expected = UiState.ValidInput
         assertEquals(expected, actual)
 
         actual = viewModel.update(text = "applee")
         expected =
-            UiState.InvalidInput(counter = "1/2", score = 0, shuffleWord = "apple".reversed())
+            UiState.InvalidInput
         assertEquals(expected, actual)
 
         actual = viewModel.update(text = "apple")
-        expected = UiState.ValidInput(counter = "1/2", score = 0, shuffleWord = "apple".reversed())
+        expected = UiState.ValidInput
         assertEquals(expected, actual)
 
         actual = viewModel.submit(text = "apple")
@@ -58,7 +58,7 @@ class ViewModelTest {
 
         actual = viewModel.update(text = "orange")
         expected =
-            UiState.ValidInput(counter = "2/2", score = 20, shuffleWord = "orange".reversed())
+            UiState.ValidInput
         assertEquals(expected, actual)
         actual = viewModel.submit(text = "orange")
         expected = UiState.GameOver(score = 40)
@@ -78,11 +78,11 @@ class ViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.update(text = "abcde")
-        expected = UiState.ValidInput(counter = "1/2", score = 0, shuffleWord = "apple".reversed())
+        expected = UiState.ValidInput
         assertEquals(expected, actual)
 
         actual = viewModel.submit(text = "abcde")
-        expected = UiState.Error(counter = "1/2", score = 0, shuffleWord = "apple".reversed())
+        expected = UiState.Error
         assertEquals(expected, actual)
 
         actual = viewModel.submit(text = "apple")
@@ -106,11 +106,11 @@ class ViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.update(text = "abcdef")
-        expected = UiState.ValidInput(counter = "2/2", score = 0, shuffleWord = "orange".reversed())
+        expected = UiState.ValidInput
         assertEquals(expected, actual)
 
         actual = viewModel.submit(text = "abcdef")
-        expected = UiState.Error(counter = "2/2", score = 0, shuffleWord = "orange".reversed())
+        expected = UiState.Error
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
