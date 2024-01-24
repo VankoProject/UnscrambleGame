@@ -13,7 +13,7 @@ import com.kliachenko.unscramblegame.databinding.InputBinding
 
 class Input : FrameLayout {
 
-    private val binding: InputBinding
+    val binding: InputBinding
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -56,7 +56,6 @@ class Input : FrameLayout {
             action
         )
     }
-
 
     override fun onSaveInstanceState(): Parcelable? {
         return super.onSaveInstanceState()?.let {

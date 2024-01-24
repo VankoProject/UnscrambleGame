@@ -39,7 +39,6 @@ class InitialPage(
             onView.check(matches(not(isEnabled())))
         }
 
-
         onView(
             allOf(
                 withId(R.id.counterTextView),

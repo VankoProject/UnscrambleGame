@@ -16,9 +16,8 @@ class ScenarioTest {
     fun correctTwice() {
         var initialPage = InitialPage(counter = "1/2", score = "Score: 0", shuffledWord = "lamina")
         initialPage.checkVisible()
-        activityScenarioRule.scenario.recreate()
-        initialPage.checkVisible()
         initialPage.clickSubmit()
+        activityScenarioRule.scenario.recreate()
         initialPage.checkVisible()
         activityScenarioRule.scenario.recreate()
         initialPage.checkVisible()

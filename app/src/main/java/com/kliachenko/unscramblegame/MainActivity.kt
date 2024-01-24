@@ -1,6 +1,8 @@
 package com.kliachenko.unscramblegame
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.kliachenko.unscramblegame.databinding.ActivityMainBinding
 
@@ -9,6 +11,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var uiState: UiState
     private lateinit var viewModel: GameViewModel
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -40,24 +44,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        // TODO: subscribe textWatcher 
-        binding.input.doAfterTextChanged {
+    private val watcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            TODO("Not yet implemented")
+        }
+
+        override fun afterTextChanged(s: Editable?) {
             val uiState = viewModel.update(binding.input.text())
             uiState.show(binding)
         }
-
     }
 
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//        outState.putSerializable(UiKey, uiState)
-//    }
+    override fun onResume() {
+        super.onResume()
+
+
+        binding.input.binding.inputEditText.addTextChangedListener(watcher)
+    }
 
     override fun onPause() {
         super.onPause()
-        // TODO: unsubscribe textWatcher 
+        binding.input.binding.inputEditText.removeTextChangedListener(watcher)
     }
 
     companion object {
