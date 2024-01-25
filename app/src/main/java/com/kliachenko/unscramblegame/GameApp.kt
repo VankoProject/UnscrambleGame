@@ -9,10 +9,10 @@ import com.kliachenko.unscramblegame.game.GameViewModel
 import com.kliachenko.unscramblegame.game.LocalStorage
 import com.kliachenko.unscramblegame.game.PermanentStorage
 import com.kliachenko.unscramblegame.game.Shuffle
-import com.kliachenko.unscramblegame.load.LoadRepository
-import com.kliachenko.unscramblegame.load.LoadViewModel
-import com.kliachenko.unscramblegame.load.WordsCacheDataSource
-import com.kliachenko.unscramblegame.load.WordsService
+import com.kliachenko.unscramblegame.load.data.LoadRepository
+import com.kliachenko.unscramblegame.load.presentation.LoadViewModel
+import com.kliachenko.unscramblegame.load.data.WordsCacheDataSource
+import com.kliachenko.unscramblegame.load.data.WordsService
 import com.kliachenko.unscramblegame.main.MainViewModel
 import com.kliachenko.unscramblegame.main.ScreenRepository
 import okhttp3.OkHttpClient
@@ -55,11 +55,13 @@ interface ProvideViewModel {
     class Base(context: Context) : ProvideViewModel {
         private val localStorage = LocalStorage.Base(context)
         private val screenRepository = ScreenRepository.Base(localStorage)
+        private val cacheDataSource = WordsCacheDataSource.Base(localStorage, Gson())
 
         override fun <T : ViewModel> viewModel(clasz: Class<out T>): T {
             val isRelease = !BuildConfig.DEBUG
             val shuffle = if (isRelease) Shuffle.Base() else Shuffle.Reversed()
             val wordsCount = if (isRelease) 10 else 2
+
 
             return when (clasz) {
                 LoadViewModel::class.java -> {
@@ -74,7 +76,6 @@ interface ProvideViewModel {
                         .client(client)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
-                    val cacheDataSource = WordsCacheDataSource.Base(localStorage, Gson())
                     LoadViewModel(
                         LoadRepository.Base(
                             retrofit.create(WordsService::class.java),
@@ -90,7 +91,8 @@ interface ProvideViewModel {
                     GameRepository.Base(
                         shuffle = shuffle,
                         wordsCount = wordsCount,
-                        permanentStorage = PermanentStorage.Base(localStorage)
+                        permanentStorage = PermanentStorage.Base(localStorage),
+                        cacheDataSource = cacheDataSource
                     )
                 )
 

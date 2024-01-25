@@ -1,4 +1,4 @@
-package com.kliachenko.unscramblegame.load
+package com.kliachenko.unscramblegame.load.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

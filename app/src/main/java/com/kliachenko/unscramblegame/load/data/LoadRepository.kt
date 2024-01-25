@@ -1,4 +1,4 @@
-package com.kliachenko.unscramblegame.load
+package com.kliachenko.unscramblegame.load.data
 
 import com.kliachenko.unscramblegame.main.ScreenRepository
 import retrofit2.Call

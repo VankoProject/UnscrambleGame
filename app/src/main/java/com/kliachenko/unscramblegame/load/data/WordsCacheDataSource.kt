@@ -1,4 +1,4 @@
-package com.kliachenko.unscramblegame.load
+package com.kliachenko.unscramblegame.load.data
 
 import com.google.gson.Gson
 import com.kliachenko.unscramblegame.game.LocalStorage
@@ -31,6 +31,15 @@ interface WordsCacheDataSource {
 
         companion object {
             private const val KEY = "words"
+        }
+    }
+
+    class Fake : Mutable {
+        override fun save(words: List<String>) {
+        }
+
+        override fun words(): List<String> {
+            return listOf("animal", "blablabla")
         }
     }
 

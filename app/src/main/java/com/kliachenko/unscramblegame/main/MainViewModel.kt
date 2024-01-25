@@ -2,7 +2,7 @@ package com.kliachenko.unscramblegame.main
 
 import androidx.lifecycle.ViewModel
 import com.kliachenko.unscramblegame.game.GameScreen
-import com.kliachenko.unscramblegame.load.LoadScreen
+import com.kliachenko.unscramblegame.load.presentation.LoadScreen
 
 class MainViewModel(private  val repository: ScreenRepository.Read): ViewModel() {
 
