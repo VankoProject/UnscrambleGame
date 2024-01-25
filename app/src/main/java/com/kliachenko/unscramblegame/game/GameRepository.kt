@@ -1,6 +1,7 @@
 package com.kliachenko.unscramblegame.game
 
 import android.content.Context
+import android.content.SharedPreferences
 
 interface GameRepository : Score {
     fun currentWordPosition(): Int
@@ -232,6 +233,45 @@ interface GameRepository : Score {
     }
 }
 
+interface LocalStorage {
+    fun save(key: String, value: Int)
+    fun save(key: String, value: Boolean)
+    fun save(key: String, value: String)
+    fun read(key: String, default: Int): Int
+    fun read(key: String, default: Boolean): Boolean
+    fun read(key: String, default: String): String
+
+    class Base(context: Context) : LocalStorage {
+
+        private val sharedPreferences =
+            context.getSharedPreferences("unScrambleStorage", Context.MODE_PRIVATE)
+
+        override fun save(key: String, value: Int) {
+            sharedPreferences.edit().putInt(key, value).apply()
+        }
+
+        override fun save(key: String, value: Boolean) {
+            sharedPreferences.edit().putBoolean(key, value).apply()
+        }
+
+        override fun save(key: String, value: String) {
+            sharedPreferences.edit().putString(key, value).apply()
+        }
+
+        override fun read(key: String, default: Int): Int {
+            return sharedPreferences.getInt(key, default)
+        }
+
+        override fun read(key: String, default: Boolean): Boolean {
+            return sharedPreferences.getBoolean(key, default)
+        }
+
+        override fun read(key: String, default: String): String {
+            return sharedPreferences.getString(key, default) ?: default
+        }
+    }
+}
+
 interface PermanentStorage {
     fun index(): Int
     fun saveIndex(index: Int)
@@ -242,30 +282,32 @@ interface PermanentStorage {
     fun attempts(): Int
     fun saveAttempts(attempts: Int)
 
-    class Base(context: Context) : PermanentStorage {
+    class Base(private val localStorage: LocalStorage) : PermanentStorage {
 
-        private val sharedPreferences =
-            context.getSharedPreferences("unScrambleStorage", Context.MODE_PRIVATE)
-
-        override fun index() = sharedPreferences.getInt(KEY_INDEX, 0)
+        override fun index() = localStorage.read(KEY_INDEX, 0)
         override fun saveIndex(index: Int) {
-            sharedPreferences.edit().putInt(KEY_INDEX, index).apply()
+            localStorage.save(KEY_INDEX, index)
         }
-        override fun uiPosition() = sharedPreferences.getInt(KEY_UI_POSITION, 1)
+
+        override fun uiPosition() = localStorage.read(KEY_UI_POSITION, 1)
         override fun saveUiPosition(uiPosition: Int) {
-            sharedPreferences.edit().putInt(KEY_UI_POSITION, uiPosition).apply()
+            localStorage.save(KEY_UI_POSITION, uiPosition)
         }
+
         override fun score(): Int {
-            return sharedPreferences.getInt(KEY_SCORE, 0)
+            return localStorage.read(KEY_SCORE, 0)
         }
+
         override fun saveScore(score: Int) {
-            sharedPreferences.edit().putInt(KEY_SCORE, score).apply()
+            localStorage.save(KEY_SCORE, score)
         }
+
         override fun attempts(): Int {
-            return sharedPreferences.getInt(KEY_ATTEMPTS, 0)
+            return localStorage.read(KEY_ATTEMPTS, 0)
         }
+
         override fun saveAttempts(attempts: Int) {
-            sharedPreferences.edit().putInt(KEY_ATTEMPTS, attempts).apply()
+            localStorage.save(KEY_ATTEMPTS, attempts)
         }
 
         companion object {

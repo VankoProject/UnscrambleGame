@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.kliachenko.unscramblegame.GameApp
+import com.kliachenko.unscramblegame.ProvideViewModel
 import com.kliachenko.unscramblegame.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
@@ -30,7 +30,8 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = (requireActivity().application as GameApp).viewModel(clasz = GameViewModel::class.java)
+        viewModel =
+            (requireActivity() as ProvideViewModel).viewModel(clasz = GameViewModel::class.java)
 
         binding.submitButton.setOnClickListener {
             uiState = viewModel.submit(binding.input.text())
