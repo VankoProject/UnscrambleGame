@@ -1,4 +1,4 @@
-package com.kliachenko.unscramblegame
+package com.kliachenko.unscramblegame.game
 
 import android.content.Context
 

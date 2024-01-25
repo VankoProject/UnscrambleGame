@@ -1,6 +1,10 @@
 package com.kliachenko.unscramblegame
 
 import android.app.Application
+import com.kliachenko.unscramblegame.game.GameRepository
+import com.kliachenko.unscramblegame.game.GameViewModel
+import com.kliachenko.unscramblegame.game.PermanentStorage
+import com.kliachenko.unscramblegame.game.Shuffle
 
 class GameApp : Application() {
 

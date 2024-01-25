@@ -1,4 +1,4 @@
-package com.kliachenko.unscramblegame
+package com.kliachenko.unscramblegame.game
 
 import android.content.Context
 import android.os.Parcel
@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import androidx.core.widget.doAfterTextChanged
+import com.kliachenko.unscramblegame.R
 import com.kliachenko.unscramblegame.databinding.InputBinding
 
 class Input : FrameLayout {

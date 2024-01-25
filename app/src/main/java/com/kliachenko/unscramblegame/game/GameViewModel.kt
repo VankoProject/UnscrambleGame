@@ -1,4 +1,4 @@
-package com.kliachenko.unscramblegame
+package com.kliachenko.unscramblegame.game
 
 class GameViewModel(private val repository: GameRepository) : SkipActions {
 

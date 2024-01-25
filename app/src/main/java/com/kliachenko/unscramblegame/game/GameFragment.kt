@@ -1,24 +1,36 @@
-package com.kliachenko.unscramblegame
+package com.kliachenko.unscramblegame.game
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.appcompat.app.AppCompatActivity
-import com.kliachenko.unscramblegame.databinding.ActivityMainBinding
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.kliachenko.unscramblegame.GameApp
+import com.kliachenko.unscramblegame.databinding.FragmentGameBinding
 
-class MainActivity : AppCompatActivity() {
+class GameFragment : Fragment() {
 
-    private lateinit var binding: ActivityMainBinding
     private lateinit var uiState: UiState
     private lateinit var viewModel: GameViewModel
 
+    private var _binding: FragmentGameBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentGameBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        viewModel = (application as GameApp).viewModel()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel = (requireActivity().application as GameApp).viewModel()
 
         binding.submitButton.setOnClickListener {
             uiState = viewModel.submit(binding.input.text())
@@ -33,14 +45,6 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             uiState = viewModel.init()
             uiState.show(binding)
-//        } else {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-//                savedInstanceState.getSerializable(UiKey, UiState::class.java) as UiState
-//            } else {
-//                savedInstanceState.getSerializable(UiKey) as UiState
-//            }
-//        }
-
         }
     }
 
@@ -61,8 +65,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
-
         binding.input.binding.inputEditText.addTextChangedListener(watcher)
     }
 
@@ -71,7 +73,8 @@ class MainActivity : AppCompatActivity() {
         binding.input.binding.inputEditText.removeTextChangedListener(watcher)
     }
 
-    companion object {
-        private const val UiKey = "uiState_key"
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
