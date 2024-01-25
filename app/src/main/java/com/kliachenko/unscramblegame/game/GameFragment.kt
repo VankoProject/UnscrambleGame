@@ -30,7 +30,7 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = (requireActivity().application as GameApp).viewModel()
+        viewModel = (requireActivity().application as GameApp).viewModel(clasz = GameViewModel::class.java)
 
         binding.submitButton.setOnClickListener {
             uiState = viewModel.submit(binding.input.text())

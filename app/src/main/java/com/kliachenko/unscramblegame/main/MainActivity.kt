@@ -14,8 +14,9 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel:MainViewModel = (application as GameApp).viewModel(MainViewModel::class.java)
 
-
-
-
+        if (savedInstanceState==null){
+            val screen = viewModel.screen()
+            screen.show(binding.container.id,supportFragmentManager)
+        }
     }
 }
