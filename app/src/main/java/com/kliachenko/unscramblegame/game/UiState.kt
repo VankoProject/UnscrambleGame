@@ -58,6 +58,10 @@ interface UiState : Serializable {
         }
     }
 
+    object Empty : UiState {
+        override fun show(binding: FragmentGameBinding) = Unit
+    }
+
     data class GameOver(private val score: Int) : UiState {
         override fun show(binding: FragmentGameBinding) = with(binding) {
             input.hide()
