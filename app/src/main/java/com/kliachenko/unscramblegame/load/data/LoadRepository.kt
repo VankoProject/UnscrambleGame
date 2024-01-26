@@ -12,10 +12,11 @@ interface LoadRepository {
     class Base(
         private val service: WordsService,
         private val cacheDataSource: WordsCacheDataSource.Save,
-        private val screenRepository: ScreenRepository.Save
+        private val screenRepository: ScreenRepository.Save,
+        private val wordsCount: Int
     ) : LoadRepository {
         override fun load(callback: LoadCallback) {
-            service.load().enqueue(object : Callback<List<String>> {
+            service.load(wordsCount).enqueue(object : Callback<List<String>> {
                 override fun onResponse(
                     call: Call<List<String>>,
                     response: Response<List<String>>

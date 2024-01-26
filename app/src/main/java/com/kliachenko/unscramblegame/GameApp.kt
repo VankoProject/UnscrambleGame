@@ -84,7 +84,8 @@ interface ProvideViewModel {
                         LoadRepository.Base(
                             retrofit.create(WordsService::class.java),
                             cacheDataSource,
-                            screenRepository
+                            screenRepository,
+                            wordsCount
                         ),
                         UiObservable.Base(),
                         navigationObservable
