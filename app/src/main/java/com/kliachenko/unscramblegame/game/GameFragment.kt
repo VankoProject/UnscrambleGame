@@ -2,12 +2,12 @@ package com.kliachenko.unscramblegame.game
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.kliachenko.unscramblegame.ProvideViewModel
+import com.kliachenko.unscramblegame.core.MyTextWatcher
 import com.kliachenko.unscramblegame.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
@@ -49,12 +49,7 @@ class GameFragment : Fragment() {
         }
     }
 
-    private val watcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        }
+    private val watcher = object : MyTextWatcher() {
 
         override fun afterTextChanged(s: Editable?) {
             val uiState = viewModel.update(binding.input.text())
