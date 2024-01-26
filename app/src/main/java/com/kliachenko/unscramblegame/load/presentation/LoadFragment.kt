@@ -12,11 +12,15 @@ class LoadFragment : Fragment() {
 
     private var _binding: FragmentLoadBinding? = null
     private val binding get() = _binding!!
+    private lateinit var viewModel: LoadViewModel
+
+    private lateinit var uiCallBack: UiCallBack
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentLoadBinding.inflate(inflater, container, false)
         return binding.root
@@ -24,20 +28,42 @@ class LoadFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val viewModel =
+        viewModel =
             (requireActivity() as ProvideViewModel).viewModel(clasz = LoadViewModel::class.java)
 
         binding.retryButton.setOnClickListener {
             viewModel.load()
         }
-
         viewModel.init(savedInstanceState == null)
 
+        uiCallBack = object : UiCallBack {
+            override fun update(loadUiState: LoadUiState) {
+                loadUiState.show(binding)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.startGettingUpdates(uiCallBack)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.stopGettingUpdates()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+}
+
+interface UiCallBack {
+
+    fun update(loadUiState: LoadUiState)
+
+    object Empty : UiCallBack {
+        override fun update(loadUiState: LoadUiState) = Unit
     }
 }

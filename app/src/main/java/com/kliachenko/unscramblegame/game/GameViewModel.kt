@@ -1,8 +1,14 @@
 package com.kliachenko.unscramblegame.game
 
 import androidx.lifecycle.ViewModel
+import com.kliachenko.unscramblegame.load.presentation.LoadScreen
+import com.kliachenko.unscramblegame.main.Navigation
+import com.kliachenko.unscramblegame.main.ScreenRepository
 
-class GameViewModel(private val repository: GameRepository) : ViewModel(),SkipActions {
+class GameViewModel(
+    private val repository: GameRepository,
+    private val screenRepository: ScreenRepository.Save,
+    private val navigation: Navigation) : ViewModel(),SkipActions {
 
     fun init() = UiState.Initial(
         "${repository.currentWordPosition()}/${repository.maxWordsCount()}",
@@ -29,7 +35,9 @@ class GameViewModel(private val repository: GameRepository) : ViewModel(),SkipAc
 
     override fun restart(): UiState {
         repository.restart()
-        return init()
+        screenRepository.saveNeedNewGameData()
+        navigation.update(LoadScreen)
+        return UiState.Empty
     }
 }
 

@@ -31,6 +31,5 @@ interface ScreenRepository {
         companion object {
             private const val KEY = "shouldLoadNewGame"
         }
-
     }
 }
