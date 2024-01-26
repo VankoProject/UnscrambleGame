@@ -2,6 +2,7 @@ package com.kliachenko.unscramblegame
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.kliachenko.unscramblegame.main.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,9 +17,8 @@ class ScenarioTest {
     fun correctTwice() {
         var initialPage = InitialPage(counter = "1/2", score = "Score: 0", shuffledWord = "lamina")
         initialPage.checkVisible()
-        activityScenarioRule.scenario.recreate()
-        initialPage.checkVisible()
         initialPage.clickSubmit()
+        activityScenarioRule.scenario.recreate()
         initialPage.checkVisible()
         activityScenarioRule.scenario.recreate()
         initialPage.checkVisible()

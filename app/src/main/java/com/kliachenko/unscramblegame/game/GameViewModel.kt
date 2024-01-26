@@ -1,6 +1,8 @@
-package com.kliachenko.unscramblegame
+package com.kliachenko.unscramblegame.game
 
-class GameViewModel(private val repository: GameRepository) : SkipActions {
+import androidx.lifecycle.ViewModel
+
+class GameViewModel(private val repository: GameRepository) : ViewModel(),SkipActions {
 
     fun init() = UiState.Initial(
         "${repository.currentWordPosition()}/${repository.maxWordsCount()}",

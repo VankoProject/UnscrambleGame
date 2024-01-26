@@ -1,5 +1,8 @@
 package com.kliachenko.unscramblegame
 
+import com.kliachenko.unscramblegame.game.GameRepository
+import com.kliachenko.unscramblegame.game.GameViewModel
+import com.kliachenko.unscramblegame.game.UiState
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
