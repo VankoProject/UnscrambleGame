@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
+import com.kliachenko.unscramblegame.core.RunAsync
 import com.kliachenko.unscramblegame.game.GameRepository
 import com.kliachenko.unscramblegame.game.GameViewModel
 import com.kliachenko.unscramblegame.game.LocalStorage
@@ -88,7 +89,8 @@ interface ProvideViewModel {
                             wordsCount
                         ),
                         UiObservable.Base(),
-                        navigationObservable
+                        navigationObservable,
+                        RunAsync.Base()
                     )
                 }
 

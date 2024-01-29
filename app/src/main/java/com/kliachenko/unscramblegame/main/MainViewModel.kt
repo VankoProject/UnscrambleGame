@@ -3,7 +3,6 @@ package com.kliachenko.unscramblegame.main
 import androidx.lifecycle.ViewModel
 import com.kliachenko.unscramblegame.game.GameScreen
 import com.kliachenko.unscramblegame.load.presentation.LoadScreen
-import com.kliachenko.unscramblegame.load.presentation.UiCallBack
 
 class MainViewModel(
     private val repository: ScreenRepository.Read,
@@ -15,7 +14,7 @@ class MainViewModel(
             LoadScreen
         else
             GameScreen
-        navigation.update(screen)
+        navigation.navigate(screen)
     }
 
     fun startGettingUpdates(observer: Navigation) {
