@@ -1,7 +1,6 @@
 package com.kliachenko.unscramblegame.game
 
 import android.content.Context
-import android.content.SharedPreferences
 import com.kliachenko.unscramblegame.load.data.WordsCacheDataSource
 
 interface GameRepository : Score {
@@ -18,7 +17,7 @@ interface GameRepository : Score {
         private val shuffle: Shuffle = Shuffle.Reversed(),
         private val wordsCount: Int = 2,
         private val scoreLogic: ScoreLogic = ScoreLogic.Base(permanentStorage),
-        cacheDataSource: WordsCacheDataSource.Read
+        cacheDataSource: WordsCacheDataSource.Read,
     ) : GameRepository {
 
         private val allWords: List<String> = cacheDataSource.words()
@@ -152,7 +151,7 @@ interface ScoreLogic : Score {
     fun clear()
 
     abstract class Abstract(
-        protected val permanentStorage: PermanentStorage
+        protected val permanentStorage: PermanentStorage,
     ) : ScoreLogic {
         override fun score(): Int = permanentStorage.score()
         override fun clear() {

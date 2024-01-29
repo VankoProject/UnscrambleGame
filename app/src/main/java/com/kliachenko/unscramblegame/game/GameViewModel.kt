@@ -36,7 +36,7 @@ class GameViewModel(
     override fun restart(): UiState {
         repository.restart()
         screenRepository.saveNeedNewGameData()
-        navigation.update(LoadScreen)
+        navigation.navigate(LoadScreen)
         return UiState.Empty
     }
 }
